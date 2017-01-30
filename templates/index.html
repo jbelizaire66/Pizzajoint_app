@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+  </head>
+  <body>
+    <div class="jumbotron jumbotron-fluid">
+  		<div class = "container">
+			<img src="{{url_for('static', filename='pizza_slice_resize.png')}}" alt = "pizza_slice"  />
+			<h1 class="display-3">Welcome to ZaZa </h1> 
+			<p class="lead"> The local pizza joint locator, where we hate pizza chains. </p>
+			<hr class="my-4">
+			{% if city %}
+                    <div class="alert alert-success" role="alert">
+  						<strong>Congratulations!</strong> Here is your local (mom and pop) pizza joint list. Enjoy! <a href="{{ url_for('index') }}">Try it again.</a>
+)
+  					</div>
+		            {% for joint in pizzajointlist %}
+		            <ul class="list-group">
+		            	<li class = "list-group-item active">{{joint.name}} </li>
+		            	<li class = "list-group-item"> <strong> Rating</strong> | {{joint.rating}} </li>
+		            	<li class = "list-group-item"> <strong> Local Phone</strong> | {{joint.localphone}} </li>
+		            	<li class = "list-group-item"> <strong>Website</strong> | &nbsp;
+		            	<a href="{{joint.website}}">  {{joint.website}}</a> </li>
+		            	<hr class="my-4">
+	            	</ul>
+		        	{% endfor %}
+                    <a href="{{ url_for('index') }}">Try it again | </a>
+          	{% else %}
+                    <h2>What city do you live in?</h1>
+                    <form action="/" class="form-inline">
+                        <div class="form-group">
+                            <input type="text" name="city" placeholder="Enter your city here" class="form-control">
+                        </div>
+                        <input type="submit" value="Submit" class="btn btn-primary">
+                    </form>
+                    <hr class="my-4">
+
+            {% endif %}
+            <a href="{{ url_for('about') }}">About this project</a>
+
+    	</div>
+	</div>
+  </body>
+</html>
+
